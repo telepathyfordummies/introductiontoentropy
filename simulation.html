@@ -139,6 +139,7 @@ function initGrid() {
 // barrier line
 function addBarrier() {
     const cells = document.querySelectorAll(".cell");
+
     for (let r = 0; r < rows; r++) {
         let idx = r * cols + Math.floor(cols / 2);
         cells[idx].classList.add("barrier");
@@ -148,6 +149,7 @@ function addBarrier() {
 // remove barrier
 function removeBarrier() {
     const cells = document.querySelectorAll(".cell");
+
     for (let r = 0; r < rows; r++) {
         let idx = r * cols + Math.floor(cols / 2);
         cells[idx].classList.remove("barrier");
@@ -186,7 +188,7 @@ function step() {
 
     grid = newGrid;
     render();
-    updateEntropy();
+    updateMetrics();
 }
 
 // draw grid
@@ -208,24 +210,39 @@ function render() {
     }
 }
 
-// simple entropy proxy
-function updateEntropy() {
+// UPDATED METRICS (entropy + mixing)
+function updateMetrics() {
 
-    let left = 0;
-    let right = 0;
+    let leftCorrect = 0;
+    let rightCorrect = 0;
+    let mixed = 0;
 
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
 
-            if (grid[r][c] === "R" && c < cols/2) left++;
-            if (grid[r][c] === "B" && c >= cols/2) right++;
+            let val = grid[r][c];
+
+            if (val === "R") {
+                if (c < cols / 2) leftCorrect++;
+                else mixed++;
+            }
+
+            if (val === "B") {
+                if (c >= cols / 2) rightCorrect++;
+                else mixed++;
+            }
         }
     }
 
-    let entropy = (rows * cols) - (left + right);
+    let entropyProxy = mixed;
+    let mixedRatio = mixed / (rows * cols);
 
-    document.getElementById("entropyDisplay").innerText =
-        "Entropy proxy: " + entropy;
+    const display = document.getElementById("entropyDisplay");
+
+    display.innerHTML =
+        "Entropy proxy: " + entropyProxy +
+        "<br>Mixed-state count: " + mixed +
+        "<br>Mixed ratio: " + mixedRatio.toFixed(2);
 }
 
 // start sim
@@ -243,12 +260,12 @@ function resetSim() {
     clearInterval(interval);
     running = false;
     initGrid();
-    updateEntropy();
+    updateMetrics();
 }
 
 // init
 initGrid();
-updateEntropy();
+updateMetrics();
 </script>
 
 </body>
