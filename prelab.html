@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Lab Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="container">
+
+    <div class="header">
+        <h1>Pre-Laboratory Assessment</h1>
+        <p>Introduction to Entropy</p>
+    </div>
+
+    <!-- QUESTION 1 -->
+    <div class="section">
+        <p><strong>1. A cup of hot coffee is placed in a cool room. What happens over time?</strong></p>
+
+        <label><input type="radio" name="q1" value="A"> The coffee becomes hotter</label>
+        <label><input type="radio" name="q1" value="B"> It remains unchanged</label>
+        <label><input type="radio" name="q1" value="C"> It cools toward room temperature</label>
+        <label><input type="radio" name="q1" value="D"> The room becomes hotter than the coffee</label>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="section">
+        <p><strong>2. Perfume released in one side of a room will:</strong></p>
+
+        <label><input type="radio" name="q2" value="A"> Stay localized</label>
+        <label><input type="radio" name="q2" value="B"> Spread throughout the room</label>
+        <label><input type="radio" name="q2" value="C"> Disappear instantly</label>
+        <label><input type="radio" name="q2" value="D"> Move only upward</label>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="section">
+        <p><strong>3. When a barrier between two particle regions is removed, particles will most likely:</strong></p>
+
+        <label><input type="radio" name="q3" value="A"> Remain separated</label>
+        <label><input type="radio" name="q3" value="B"> Freeze in place</label>
+        <label><input type="radio" name="q3" value="C"> Mix together</label>
+        <label><input type="radio" name="q3" value="D"> All move to one side</label>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="section">
+        <p><strong>4. Which arrangement is more probable?</strong></p>
+
+        <label><input type="radio" name="q4" value="A"> Fully separated particles</label>
+        <label><input type="radio" name="q4" value="B"> Fully ordered arrangement</label>
+        <label><input type="radio" name="q4" value="C"> Mixed arrangement</label>
+        <label><input type="radio" name="q4" value="D"> No particles moving</label>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="section">
+        <p><strong>5. Entropy is best described as:</strong></p>
+
+        <label><input type="radio" name="q5" value="A"> Energy stored in bonds</label>
+        <label><input type="radio" name="q5" value="B"> Number of possible microstates</label>
+        <label><input type="radio" name="q5" value="C"> Temperature of a system</label>
+        <label><input type="radio" name="q5" value="D"> Mass of a system</label>
+    </div>
+
+    <button class="button button-primary" onclick="submitPrelab()">
+        Submit Pre-Lab
+    </button>
+
+</div>
+
+<script>
+function submitPrelab() {
+
+    // store answers
+    for (let i = 1; i <= 5; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        sessionStorage.setItem(`q${i}`, answer ? answer.value : "null");
+    }
+
+    window.location.href = "prelabresults.html";
+}
+</script>
+
+</body>
+</html>
