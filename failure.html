@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Outcome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="container">
+
+    <div class="header">
+        <h1>Assessment Outcome</h1>
+        <p>Introduction to Entropy</p>
+    </div>
+
+    <div class="section">
+
+        <p id="scoreText">Processing results...</p>
+
+        <p id="statusText"></p>
+
+    </div>
+
+    <div class="section note">
+
+        The post-laboratory assessment has been recorded successfully.  
+        Conceptual mastery thresholds were not fully met based on current responses.
+
+    </div>
+
+    <div class="section">
+
+        <p>
+            It is recommended that the participant review the following conceptual areas:
+        </p>
+
+        <ul>
+            <li>Microstates and macrostates</li>
+            <li>Statistical interpretation of entropy</li>
+            <li>Irreversibility in closed systems</li>
+        </ul>
+
+    </div>
+
+    <div class="section warning">
+
+        Systems that evolve toward equilibrium exhibit increasingly probable configurations over time.
+        Further analysis may improve conceptual alignment.
+
+    </div>
+
+</div>
+
+<script>
+function loadResult() {
+
+    let score = sessionStorage.getItem("finalScore") || 0;
+
+    document.getElementById("scoreText").innerText =
+        "Final Score: " + score + " / 5";
+
+    document.getElementById("statusText").innerText =
+        "Status: Conceptual threshold not fully achieved";
+}
+
+loadResult();
+</script>
+
+</body>
+</html>
