@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entropy Simulation</title>
+<link rel="stylesheet" href="style.css">
 
+<style>
+/* Simulation-specific styling */
+.sim-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(20, 18px);
+    grid-template-rows: repeat(12, 18px);
+    gap: 2px;
+    margin-top: 20px;
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.cell {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    background: #1e293b;
+}
+
+.red {
+    background: #ef4444;
+}
+
+.blue {
+    background: #3b82f6;
+}
+
+.barrier {
+    background: #94a3b8;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.controls button {
+    margin-right: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Simulation: Particle Distribution</h1>
+        <p>Closed System Model — Entropy and Statistical Mixing</p>
+    </div>
+
+    <div class="section note">
+        Initial condition: particles are separated by a barrier.
+        Observe how the system evolves once the barrier is removed.
+    </div>
+
+    <div class="sim-wrapper">
+
+        <div id="grid" class="grid"></div>
+
+        <div class="controls">
+            <button class="button button-primary" onclick="startSim()">Start Simulation</button>
+            <button class="button" onclick="resetSim()">Reset</button>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <p id="entropyDisplay">Entropy proxy: 0</p>
+    </div>
+
+    <div class="section">
+        <a class="button button-primary arrow-link" href="postlab.html">
+            → Continue to Post-Lab
+        </a>
+    </div>
+
+</div>
+
+<script>
+const rows = 12;
+const cols = 20;
+
+let grid = [];
+let running = false;
+let interval;
+
+// create grid
+function initGrid() {
+
+    grid = [];
+    const container = document.getElementById("grid");
+    container.innerHTML = "";
+
+    for (let r = 0; r < rows; r++) {
+        grid[r] = [];
+
+        for (let c = 0; c < cols; c++) {
+
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+
+            // left side = red particles
+            if (c < cols / 2 && Math.random() < 0.6) {
+                cell.classList.add("red");
+                grid[r][c] = "R";
+            }
+            // right side = blue particles
+            else if (c >= cols / 2 && Math.random() < 0.6) {
+                cell.classList.add("blue");
+                grid[r][c] = "B";
+            }
+            else {
+                grid[r][c] = "";
+            }
+
+            container.appendChild(cell);
+        }
+    }
+
+    addBarrier();
+}
+
+// barrier line
+function addBarrier() {
+    const cells = document.querySelectorAll(".cell");
+    for (let r = 0; r < rows; r++) {
+        let idx = r * cols + Math.floor(cols / 2);
+        cells[idx].classList.add("barrier");
+    }
+}
+
+// remove barrier
+function removeBarrier() {
+    const cells = document.querySelectorAll(".cell");
+    for (let r = 0; r < rows; r++) {
+        let idx = r * cols + Math.floor(cols / 2);
+        cells[idx].classList.remove("barrier");
+    }
+}
+
+// simulate mixing
+function step() {
+
+    let newGrid = JSON.parse(JSON.stringify(grid));
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+
+            if (grid[r][c] === "") continue;
+
+            let dirs = [
+                [1,0], [-1,0], [0,1], [0,-1]
+            ];
+
+            let [dr, dc] = dirs[Math.floor(Math.random() * dirs.length)];
+
+            let nr = r + dr;
+            let nc = c + dc;
+
+            if (
+                nr >= 0 && nr < rows &&
+                nc >= 0 && nc < cols &&
+                newGrid[nr][nc] === ""
+            ) {
+                newGrid[nr][nc] = grid[r][c];
+                newGrid[r][c] = "";
+            }
+        }
+    }
+
+    grid = newGrid;
+    render();
+    updateEntropy();
+}
+
+// draw grid
+function render() {
+
+    const cells = document.querySelectorAll(".cell");
+    let i = 0;
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+
+            cells[i].className = "cell";
+
+            if (grid[r][c] === "R") cells[i].classList.add("red");
+            if (grid[r][c] === "B") cells[i].classList.add("blue");
+
+            i++;
+        }
+    }
+}
+
+// simple entropy proxy
+function updateEntropy() {
+
+    let left = 0;
+    let right = 0;
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+
+            if (grid[r][c] === "R" && c < cols/2) left++;
+            if (grid[r][c] === "B" && c >= cols/2) right++;
+        }
+    }
+
+    let entropy = (rows * cols) - (left + right);
+
+    document.getElementById("entropyDisplay").innerText =
+        "Entropy proxy: " + entropy;
+}
+
+// start sim
+function startSim() {
+
+    if (!running) {
+        removeBarrier();
+        running = true;
+        interval = setInterval(step, 200);
+    }
+}
+
+// reset sim
+function resetSim() {
+    clearInterval(interval);
+    running = false;
+    initGrid();
+    updateEntropy();
+}
+
+// init
+initGrid();
+updateEntropy();
+</script>
+
+</body>
+</html>
