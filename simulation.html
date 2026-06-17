@@ -75,6 +75,7 @@
 
         <div class="controls">
             <button class="button button-primary" onclick="startSim()">Start Simulation</button>
+            <button class="button" onclick="stopSim()">Stop Simulation</button>
             <button class="button" onclick="resetSim()">Reset</button>
         </div>
 
@@ -255,6 +256,12 @@ function startSim() {
     }
 }
 
+ // stop sim
+    function stopSim() {
+    clearInterval(interval);
+    running = false;
+}
+    
 // reset sim
 function resetSim() {
     clearInterval(interval);
