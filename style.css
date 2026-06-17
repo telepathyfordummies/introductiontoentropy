@@ -1,0 +1,188 @@
+/* =========================
+   BASE STYLE STUFF
+========================= */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1f2933;
+    line-height: 1.6;
+}
+
+/* Centered page container like lab modules */
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================
+   TYPOGRAPHY SHIT
+========================= */
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: #102a43;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* “lab manual” header feel */
+.header {
+    border-bottom: 2px solid #e1e8ed;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/* =========================
+   BUTTONS!!
+========================= */
+
+button, .button {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 15px;
+    border: 1px solid #bcccdc;
+    background-color: #f0f4f8;
+    color: #102a43;
+    cursor: pointer;
+    transition: 0.2s ease;
+    text-decoration: none;
+}
+
+button:hover, .button:hover {
+    background-color: #e4e7eb;
+}
+
+/* Primary action (Next / Submit / Continue) */
+.button-primary {
+    background-color: #2f6fed;
+    color: white;
+    border: none;
+}
+
+.button-primary:hover {
+    background-color: #1f57c3;
+}
+
+/* Arrow to click links */
+.arrow-link {
+    font-size: 18px;
+    margin-top: 30px;
+    display: inline-block;
+}
+
+/* =========================
+   FORMS (Prelab / Quiz)
+========================= */
+
+label {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #d9e2ec;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+label:hover {
+    background: #e6f0ff;
+    border-color: #9fb3c8;
+}
+
+/* Radio buttons */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Selected answer styling  */
+.selected {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+}
+
+/* =========================
+   LAB SECTIONS
+========================= */
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section-divider {
+    border-top: 1px solid #e1e8ed;
+    margin: 30px 0;
+}
+
+/* =========================
+   TABLES (data collection stuff but i dont know if im using these.)
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #d9e2ec;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #f0f4f8;
+    font-weight: 600;
+}
+
+/* =========================
+   UI DETAILS IN CASE I NEED THEM
+========================= */
+
+.note {
+    font-size: 13px;
+    color: #52606d;
+    background: #f0f4f8;
+    padding: 10px;
+    border-left: 4px solid #bcccdc;
+    margin: 15px 0;
+}
+
+.warning {
+    background: #fff4e5;
+    border-left: 4px solid #f0b429;
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* =========================
+   SIMULATION AREA 
+========================= */
+
+.simulation-box {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 20px;
+    font-family: monospace;
+    border-radius: 4px;
+}
