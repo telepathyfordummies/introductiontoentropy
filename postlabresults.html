@@ -72,11 +72,18 @@ let passed = false;
 function gradePostlab() {
 
     const key = {
-        post_q1: "B",
+        post_q1: "C",
         post_q2: "C",
-        post_q3: "C",
+        post_q3: "B",
         post_q4: "C",
-        post_q5: "B"
+        post_q5: "C",
+        post_q6: "A",
+        post_q7: "C",
+        post_q8: "A",
+        post_q9: "C",
+        post_q10: "D",
+        post_q11: "B",
+        post_q12: "D",
     };
 
     let score = 0;
@@ -86,10 +93,10 @@ function gradePostlab() {
         if (val === key[q]) score++;
     }
 
-    passed = score >= 3;
+    passed = score >= 7;
 
     document.getElementById("scoreText").innerText =
-        `Score: ${score} / 5`;
+        `Score: ${score} / 12`;
 
     document.getElementById("statusText").innerText =
         passed
@@ -104,7 +111,7 @@ function gradePostlab() {
 
 function proceed() {
     if (passed) {
-        window.location.href = "https://test.com";
+        window.location.href = "https://x.com/RLTelepath/status/2062267162488627206?s=20";
     } else {
         window.location.href = "failure.html";
     }
