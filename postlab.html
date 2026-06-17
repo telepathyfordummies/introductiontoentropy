@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Lab Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="container">
+
+    <div class="header">
+        <h1>Post-Laboratory Assessment</h1>
+        <p>Introduction to Entropy</p>
+    </div>
+
+    <div class="section">
+
+        <p><strong>1. What did the simulation primarily demonstrate?</strong></p>
+        <label><input type="radio" name="q1" value="A"> Particles prefer ordered states</label>
+        <label><input type="radio" name="q1" value="B"> Systems naturally evolve toward more probable distributions</label>
+        <label><input type="radio" name="q1" value="C"> Energy is destroyed during mixing</label>
+        <label><input type="radio" name="q1" value="D"> Particles stop moving over time</label>
+
+    </div>
+
+    <div class="section">
+
+        <p><strong>2. A macrostate is best described as:</strong></p>
+        <label><input type="radio" name="q2" value="A"> A single particle arrangement</label>
+        <label><input type="radio" name="q2" value="B"> A microscopic state of motion</label>
+        <label><input type="radio" name="q2" value="C"> The overall observable condition of a system</label>
+        <label><input type="radio" name="q2" value="D"> The temperature of a single particle</label>
+
+    </div>
+
+    <div class="section">
+
+        <p><strong>3. Why do mixed states occur more frequently?</strong></p>
+        <label><input type="radio" name="q3" value="A"> They require less energy</label>
+        <label><input type="radio" name="q3" value="B"> They are artificially enforced</label>
+        <label><input type="radio" name="q3" value="C"> They correspond to a larger number of microstates</label>
+        <label><input type="radio" name="q3" value="D"> They eliminate particle motion</label>
+
+    </div>
+
+    <div class="section">
+
+        <p><strong>4. According to the Second Law of Thermodynamics:</strong></p>
+        <label><input type="radio" name="q4" value="A"> Entropy decreases in isolated systems</label>
+        <label><input type="radio" name="q4" value="B"> Entropy remains constant always</label>
+        <label><input type="radio" name="q4" value="C"> Entropy tends to increase in isolated systems</label>
+        <label><input type="radio" name="q4" value="D"> Entropy depends only on mass</label>
+
+    </div>
+
+    <div class="section">
+
+        <p><strong>5. What is heat death of the universe?</strong></p>
+        <label><input type="radio" name="q5" value="A"> A universe filled with perfect order</label>
+        <label><input type="radio" name="q5" value="B"> A state where energy is evenly distributed and no work can be done</label>
+        <label><input type="radio" name="q5" value="C"> A universe with no matter</label>
+        <label><input type="radio" name="q5" value="D"> A sudden collapse into a single point</label>
+
+    </div>
+
+    <button class="button button-primary" onclick="submitPostlab()">
+        Submit Assessment
+    </button>
+
+</div>
+
+<script>
+function submitPostlab() {
+
+    for (let i = 1; i <= 5; i++) {
+        let ans = document.querySelector(`input[name="q${i}"]:checked`);
+        sessionStorage.setItem(`post_q${i}`, ans ? ans.value : "null");
+    }
+
+    window.location.href = "postlabresults.html";
+}
+</script>
+
+</body>
+</html>
