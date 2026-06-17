@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Lab Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Post-Lab Results</h1>
+        <p>Automated Assessment Report</p>
+    </div>
+
+    <div class="section">
+        <p id="scoreText">Calculating results...</p>
+        <p id="statusText"></p>
+    </div>
+
+    <div class="note">
+        This assessment evaluates conceptual understanding of entropy and statistical systems.
+        Results are recorded for course tracking purposes.
+    </div>
+
+    <a id="continueBtn" class="button button-primary arrow-link" href="results.html">
+        → Continue
+    </a>
+
+</div>
+
+<script>
+function gradePostlab() {
+
+    const key = {
+        post_q1: "B",
+        post_q2: "C",
+        post_q3: "C",
+        post_q4: "C",
+        post_q5: "B"
+    };
+
+    let score = 0;
+
+    for (let q in key) {
+        let val = sessionStorage.getItem(q);
+        if (val === key[q]) score++;
+    }
+
+    document.getElementById("scoreText").innerText =
+        `Score: ${score} / 5`;
+
+    if (score >= 3) {
+        document.getElementById("statusText").innerText =
+            "Status: Conceptual understanding achieved.";
+    } else {
+        document.getElementById("statusText").innerText =
+            "Status: Review of entropy principles recommended.";
+    }
+
+    // store final score for results page
+    sessionStorage.setItem("finalScore", score);
+}
+
+gradePostlab();
+</script>
+
+</body>
+</html>
