@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Lab Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="container">
+
+    <div class="header">
+        <h1>Pre-Lab Results</h1>
+        <p>Recorded Assessment Output</p>
+    </div>
+
+    <div class="section">
+        <p id="scoreText">Calculating results...</p>
+        <p id="statusText"></p>
+    </div>
+
+    <div class="section note">
+        Pre-laboratory assessment is used for baseline understanding only.  
+        It does not affect progression through the laboratory module.
+    </div>
+
+    <a id="continueLink" class="button button-primary arrow-link" href="background.html">
+        → Continue to Background
+    </a>
+
+</div>
+
+<script>
+function gradePrelab() {
+
+    let answers = {
+        q1: sessionStorage.getItem("q1"),
+        q2: sessionStorage.getItem("q2"),
+        q3: sessionStorage.getItem("q3"),
+        q4: sessionStorage.getItem("q4"),
+        q5: sessionStorage.getItem("q5")
+    };
+
+    // correct answers
+    let key = {
+        q1: "C",
+        q2: "B",
+        q3: "C",
+        q4: "C",
+        q5: "B"
+    };
+
+    let score = 0;
+
+    for (let q in key) {
+        if (answers[q] === key[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("scoreText").innerText =
+        `Score: ${score} / 5`;
+
+    if (score >= 3) {
+        document.getElementById("statusText").innerText =
+            "Status: Satisfactory understanding recorded.";
+    } else {
+        document.getElementById("statusText").innerText =
+            "Status: Additional conceptual review recommended.";
+    }
+}
+
+gradePrelab();
+</script>
+
+</body>
+</html>
